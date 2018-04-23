@@ -10,7 +10,7 @@ namespace Blackjack.Clases
     {
         public Dealer Dealer;
         public Player Player;
-        public Deck;
+        public Deck Deck;
 
         public bool StartNewGame()
         {
@@ -19,9 +19,18 @@ namespace Blackjack.Clases
             if (startNew)
             {
                 Console.WriteLine("Uzsākta jauna spēle!");
-                Deck = new Deck();
+                Deck = Deck.TakeNewDeck();
                 Dealer = new Dealer();
                 Player = new Player();
+
+                Deck.Shuffle();
+                Player.GiveCard(Deck.TakeCard());      // divas reizes lai speletajam iedotu karti
+                Player.GiveCard(Deck.TakeCard());
+
+                while (Player.NeedAnotherCard())
+                {
+                    Player.GiveCard(Deck.TakeCard());
+                }
             }
             return startNew;
 

@@ -14,30 +14,37 @@ namespace Blackjack.Clases
 
         public List<Card>Cards;
 
-        public Deck()
+        public Deck()       // funkcija bez ; ari ir funkcija
         {
             Cards = new List<Card>();
-            foreach(char s in Suits)
-            {
+            foreach(char s in Suits)         // apstrad mastus 
+            {                                                                       // izveido visas iespejamas kombinacijas no saraksta
                 foreach(string v in Values)// apstrada vertibas
                 {
-                    Cards.Add(new Card(v, s));//pievieno karti karshu kavai
+                    Cards.Add(new Card(v, s));//pievieno karti karshu kavai       14 masti 13 kartis
                 }
             }
 
         }
 
-        public Card TakeCard()
+        public Card TakeCard()                // funkcija
         {
-            Card newCard = Cards[0];
-            Cards.RemoveAt(0);
+            Card newCard = Cards[0];// panjem karti
+            Cards.RemoveAt(0);//iznjem karti no karshu kavas
 
             return newCard;// atgriz karti kas iznjemta no saraksta
         }
 
-        public Deck TakeNewDeck()
+        public static Deck TakeNewDeck()
         {
-            return null;
+            return new Deck();
         }
+        public void Shuffle()
+        {
+            Cards = Cards.OrderBy(c => Guid.NewGuid()).ToList();            // sakartos random kartiba       guid uztaisa unikalu kartibu un divi vienadi nav iespejam
+
+        }                     // jauna funkcija izveido jaunu saucamo ko unikali sakarto
+
+
     }
 }

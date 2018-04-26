@@ -27,14 +27,50 @@ namespace Blackjack.Clases
                 Player.GiveCard(Deck.TakeCard());      // divas reizes lai speletajam iedotu karti
                 Player.GiveCard(Deck.TakeCard());
 
+                Dealer.GiveCard(Deck.TakeCard(),true);        // funkcija ar diviem parametriem
+                Dealer.GiveCard(Deck.TakeCard());               // funkcija ar vineu
+
+
                 while (Player.NeedAnotherCard())
                 {
                     Player.GiveCard(Deck.TakeCard());
                 }
+
+                while (Dealer.NeedAnotherCard())
+                {
+                    Dealer.GiveCard(Deck.TakeCard());
+                }
+                CountPoints();
             }
             return startNew;
 
 
+        }
+        public void CountPoints()
+        {
+            int playerPoints = Player.CountPoints();
+            int dealerPoints = Dealer.CountPoints();
+
+            if(playerPoints> 21)
+            {
+                Console.WriteLine("Tu zaudēji!!");
+            }
+            else if (dealerPoints > 21)
+            {
+                Console.Write("Tu uzvarēji!");
+            }
+            else if (dealerPoints == playerPoints)
+            {
+                Console.WriteLine("Nav uzvarētāja!");
+            }
+            else if (playerPoints>dealerPoints)
+            {
+                Console.WriteLine("Tu uzvarēji!");
+            }
+            else
+            {
+                Console.WriteLine("Tu Zaudēji!");
+            }
         }
 
         public static bool GetAnswer(string question)

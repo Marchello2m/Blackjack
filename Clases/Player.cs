@@ -15,10 +15,11 @@ namespace Blackjack.Clases
             Cards = new List<Card>(); // mainigaja cards tiek izveidots jauns tukshu saraksts
 
         }
-        public void GiveCard(Card card)    // konstroktoru izveido lai definetu noklusetas vertibas
+        public virtual void GiveCard(Card card)    // konstroktoru izveido lai definetu noklusetas vertibas
         {
             Console.WriteLine("Spēlētajs saņēma kārti " +card.Suit + card.Value);
             Cards.Add(card);         // funkcija ievieto speletajam kartis roka
+            Console.WriteLine("Punkti: "+ CountPoints());
 
         }
         public int CountPoints()
@@ -43,8 +44,14 @@ namespace Blackjack.Clases
 
             return points;
         }
-        public bool NeedAnotherCard()
+        public virtual bool NeedAnotherCard()
         {
+            if (CountPoints() >= 21)
+            {
+                return false;
+            }
+
+
             var answer = Game.GetAnswer("Vai nepieciešama kārts?");
 
             return answer;
